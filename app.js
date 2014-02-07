@@ -2,24 +2,31 @@ $(document).ready(function(){
 
 /* Add new items */
 $('input').on('keydown', function(e) {
-	if (e.which == 13) {
-		addItem(); 
-		$(this).val('') // Clear entry box
+	if (e.which === 13) {
+		
+		if ($('input').val() === "" || $('input').val() === " ") { 
+			return false; 		// Disable subimission if input is empty
+		}
+
+		else {
+			addItem(); 
+			$(this).val('');  // Clear entry box
+			}
 	};
-}),
+});
 
 /* Cross Out Finished Items */
 $('.checkMark').on('click', function(e){
 	event.preventDefault(); // Prevent link
 	$(this).closest('.row').find('.textbox').removeAttr('id').attr('id','finished');
 	// $(this).closest('.row:first').removeAttr('id').attr('id','finished'); // Didn't work, bad selectors
-}),
+});
 
 /* Delete Items */
 $('.xMark').on('click', function(e){
 	event.preventDefault(); // Prevent link
 	$(this).closest('.row').fadeOut();
-})
+});
 
 function addItem() {
 	var value = $('input:text').val(); // Take input value
